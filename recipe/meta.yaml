@@ -12,16 +12,22 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/ADGofTest_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/ADGofTest/ADGofTest_{{ version }}.tar.gz
-
   sha256: 9cd9313954f6ecd82480d373f6c5371ca84ab33e3f5c39d972d35cfcf1096846
 
+
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
 build:
-  skip: true  # [win32]
+  # If this is a new build for the same version, increment the build number.
   number: 0
 
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
+
 
 requirements:
   build:
@@ -32,14 +38,20 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('ADGofTest')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('ADGofTest')"           # [not win]
     - "\"%R%\" -e \"library('ADGofTest')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
 
 about:
   home: https://CRAN.R-project.org/package=ADGofTest
   license: GPL
-  summary: |
-    Anderson-Darling GoF test with p-value calculation based on Marsaglia's 2004 paper
+  summary: Anderson-Darling GoF test with p-value calculation based on Marsaglia's 2004 paper
     "Evaluating the Anderson-Darling Distribution"
   license_family: GPL
 
@@ -47,3 +59,25 @@ extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: ADGofTest
+# Type: Package
+# Title: Anderson-Darling GoF test
+# Version: 0.3
+# Date: 2011-12-28
+# Author: Carlos J. Gil Bellosta
+# Maintainer: Carlos J. Gil Bellosta <cgb@datanalytics.com>
+# Description: Anderson-Darling GoF test with p-value calculation based on Marsaglia's 2004 paper "Evaluating the Anderson-Darling Distribution"
+# License: GPL
+# LazyLoad: yes
+# Packaged: 2011-12-28 01:41:10 UTC; carlos
+# Repository: CRAN
+# Date/Publication: 2011-12-28 13:50:19
+# NeedsCompilation: no
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
