@@ -8,7 +8,6 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: ADGofTest_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/ADGofTest_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/ADGofTest/ADGofTest_{{ version }}.tar.gz
@@ -26,6 +25,7 @@ build:
 
 requirements:
   build:
+    - {{posix}}zip               # [win]
 
   host:
     - r-base
